@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block page_title %}
+About Page
+{% endblock %}
+
+{% block main_section %}
+<section id="article-section" class="line">
+   <div class="margin">
+      <!-- ARTICLES -->
+      <div class="s-12 l-9">
+         <!-- ARTICLE 1 -->
+         <article class="margin-bottom">
+            <!-- text -->
+            <div class="post-text">
+               <h1>About {{ config.site_name }} | {{ config.site_name2 }}</h1>
+               <img src="{{ config.main_image.url }}" alt="{{ config.site_name }}">
+               <p>
+                 {{ config.body1}}
+               </p>
+               <br>
+               <blockquote>
+                 {{ config.quote }}
+                </blockquote>
+               <br>
+               <p>
+                  {{ config.body2 }}
+               </p>
+               <h2>{{ config.sub_title }}</h2>
+               <p>
+                  {{ config.body3 }}
+               </p>
+               <img src="{{ config.sub_image.url }}" alt="{{ config.site_name }}2">
+               <p>
+                  {{ config.body4 }}
+               </p>
+            </div>
+         </article>
+         <!-- AD REGION -->
+         <div class="line">
+            <div class="advertising horizontal">
+               <img src="{% static 'img/banner-horizontal.jpg' %}" alt="ad banner">
+            </div>
+         </div>
+      </div>
+      <!-- SIDEBAR -->
+      <div class="s-12 l-3">
+         <aside>
+           <!-- AD REGION -->
+           <div class="advertising margin-bottom">
+              <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+           </div>
+           <!-- LATEST POSTS -->
+           <div class="aside-block margin-bottom">
+              <h3>Latest posts</h3>
+              {% for post in posts %}
+              {% if forloop.counter <= 10 %}
+              <a class="latest-posts" href="{% url 'blog_detail' post.pk%}">
+                 <h5>{{ post.title }}</h5>
+                 <p>
+                    {{ post.body1 | slice:":50" }}...
+                 </p>
+              </a>
+              {% endif %}
+              {% endfor %}
+           </div>
+           <!-- AD REGION -->
+           <div class="advertising margin-bottom">
+              <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+           </div>
+         </aside>
+      </div>
+   </div>
+  </section>
+{% endblock %}

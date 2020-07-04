@@ -1,0 +1,22 @@
+body{
+  overflow-wrap: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+}
+
+#tag{
+  color: black !important;
+  list-style: none;
+  margin-left: -30px;
+}
+
+.messages{
+  list-style: none;
+}
+
+.advert{
+  height: 500px !important;
+}

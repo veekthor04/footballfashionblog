@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block page_title %}
+Blog Archive
+{% endblock %}
+
+{% block main_section %}
+<section id="article-section" class="line archive">
+  <div class="margin">
+    <!-- ARTICLES -->
+    <div class="s-12 l-9">
+
+      {% for post in posts %}
+      {% if forloop.counter|modulo:5 == 1 %}
+       <!-- ARTICLE 1 -->
+       <article class="margin-bottom">
+          <div class="post-1 line">
+             <!-- image -->
+             <div class="s-12 l-11 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+                 <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+             </div>
+             <!-- date -->
+             <div class="s-12 l-1 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+             </div>
+          </div>
+          <!-- text -->
+          <div class="post-text">
+            <a href="{% url 'blog_detail' post.pk%}">
+               <h2>{{ post.title }}</h2>
+            </a>
+            <small>
+              <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+              &nbsp;
+              {% for category in post.categories.all %}
+              <a id="link" href="{% url 'blog_category' category.name %}">
+                {{ category.name }} |
+              </a>&nbsp;
+              {% endfor %}
+            </small>
+            <p>{{ post.body1 | slice:":150" }}...
+            </p>
+             <a class="continue-reading" href="{% url 'blog_detail' post.pk%}">Continue reading</a>
+          </div>
+       </article>
+       {% elif forloop.counter|modulo:5 == 2 %}
+       <!-- ARTICLE 2 -->
+       <article class="margin-bottom">
+          <div class="post-2 line">
+             <!-- image -->
+             <div class="s-12 l-11 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+                 <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+             </div>
+             <!-- date -->
+             <div class="s-12 l-1 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+             </div>
+          </div>
+          <!-- text -->
+          <div class="post-text">
+            <a href="{% url 'blog_detail' post.pk%}">
+               <h2>{{ post.title }}</h2>
+            </a>
+             <small>
+               <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+               &nbsp;
+               {% for category in post.categories.all %}
+               <a id="link" href="{% url 'blog_category' category.name %}">
+                 {{ category.name }} |
+               </a>&nbsp;
+               {% endfor %}
+             </small>
+             <p>{{ post.body1 | slice:":150" }}...
+             </p>
+             <a class="continue-reading" href="{% url 'blog_detail' post.pk%}">Continue reading</a>
+          </div>
+       </article>
+       {% elif forloop.counter|modulo:5 == 3 %}
+       <!-- ARTICLE 3 -->
+       <article class="margin-bottom">
+          <div class="post-3 line">
+             <!-- image -->
+             <div class="s-12 l-11 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+             </div>
+             <!-- date -->
+             <div class="s-12 l-1 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+             </div>
+          </div>
+          <!-- text -->
+          <div class="post-text">
+            <a href="{% url 'blog_detail' post.pk%}">
+               <h2>{{ post.title }}</h2>
+            </a>
+            <small>
+              <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+              &nbsp;
+              {% for category in post.categories.all %}
+              <a id="link" href="{% url 'blog_category' category.name %}">
+                {{ category.name }} |
+              </a>&nbsp;
+              {% endfor %}
+            </small>
+            <p>{{ post.body1 | slice:":150" }}...
+            </p>
+             <a class="continue-reading" href="{% url 'blog_detail' post.pk%}">Continue reading</a>
+          </div>
+       </article>
+       {% elif forloop.counter|modulo:5 == 4 %}
+       <!-- ARTICLE 4 -->
+       <article class="margin-bottom">
+          <div class="post-4 line">
+             <!-- image -->
+             <div class="s-12 l-11 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+             </div>
+             <!-- date -->
+             <div class="s-12 l-1 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+             </div>
+          </div>
+          <!-- text -->
+          <div class="post-text">
+            <a href="{% url 'blog_detail' post.pk%}">
+               <h2>{{ post.title }}</h2>
+            </a>
+            <small>
+              <a id="link" href="{% url 'blog_category' all %}" >Tags:</a>
+              &nbsp;
+              {% for category in post.categories.all %}
+              <a id="link" href="{% url 'blog_category' category.name %}">
+                {{ category.name }} |
+              </a>&nbsp;
+              {% endfor %}
+            </small>
+            <p>{{ post.body1 | slice:":150" }}...
+            </p>
+             <a class="continue-reading" href="{% url 'blog_detail' post.pk%}">Continue reading</a>
+          </div>
+       </article>
+        {% else %}
+       <!-- ARTICLE 5 -->
+       <article class="margin-bottom">
+          <div class="post-5 line">
+             <!-- date -->
+             <div class="s-12 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+             </div>
+          </div>
+          <!-- text -->
+          <div class="post-text">
+            <a href="{% url 'blog_detail' post.pk%}">
+               <h2>{{ post.title }}</h2>
+            </a>
+            <small>
+              <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+              &nbsp;
+              {% for category in post.categories.all %}
+              <a id="link" href="{% url 'blog_category' category.name %}">
+                {{ category.name }} |
+              </a>&nbsp;
+              {% endfor %}
+            </small>
+            <p>{{ post.body1 | slice:":150" }}...
+            </p>
+             <a class="continue-reading" href="{% url 'blog_detail' post.pk%}">Continue reading</a>
+          </div>
+       </article>
+       {% endif %}
+       {% endfor %}
+    </div>
+    <!-- SIDEBAR -->
+    <div class="s-12 l-3">
+       <aside>
+         <!-- TAGS -->
+         <div class="aside-block margin-bottom">
+            <h3>Tags</h3>
+            <p class="author">Selected:
+              {% if selected %}
+              {% for item in selected %}
+              {{ item }} |
+              {% endfor %}
+              {% else %}
+              {{ category }}
+              {% endif %}
+            </p>
+            <form class="customform" action="/post/custom/" method="post">
+              {% csrf_token %}
+               {{ tagform }}
+               <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+         </div>
+          <!-- AD REGION -->
+          <div class="advertising margin-bottom">
+             <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+          </div>
+       </aside>
+    </div>
+  </div>
+</section>
+{% endblock %}

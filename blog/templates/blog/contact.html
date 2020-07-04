@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block page_title %}
+Contact Page
+{% endblock %}
+
+{% block main_section %}
+<section id="article-section" class="line">
+   <div class="margin">
+      <!-- ARTICLES -->
+      <div class="s-12 l-9">
+        {% if messages %}
+<ul class="messages" style="list-style: none;">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+         <!-- ARTICLE 1 -->
+         <article class="margin-bottom">
+            <!-- text -->
+            <div class="post-text">
+               <h1>Contact Me</h1>
+               <div class="line">
+                  <div class="margin">
+                     <div class="s-12 l-6">
+                        <h4>Web Developer</h4>
+                        <address>
+                           <p><i class="icon-home icon"></i> 25 Saminu Alaba St, Ijegun, Lagos</p>
+                           <p><i class="icon-globe_black icon"></i> Nigeria - Africa</p>
+                           <p><i class="icon-mail icon"></i> victoradenuga04@yahoo.com</p>
+                        </address>
+                        <br />
+                        <h4>Social</h4>
+                        <p><i class="icon-facebook icon"></i> <a target="_blank" href="https://www.facebook.com/victoradenuga04/">victoradenuga04</a></p>
+                        <p><i class="icon-linked_in icon"></i> <a target="_blank" href="https://www.linkedin.com/in/victor-adenuga-455657117/">victor-adenuga</a></p>
+                        <p class="margin-bottom"><i class="icon-twitter icon"></i> <a target="_blank" href="https://twitter.com/veekthor04">veekthor04</a></p>
+                     </div>
+                     <div class="s-12 l-6">
+                        <h4>Send a message</h4>
+                        <form class="customform" action="/contact/" method="post">
+                          {% csrf_token %}
+                           <div class="s-12"><input name="email" placeholder="Your e-mail" title="Your e-mail" type="text" required/></div>
+                           <div class="s-12"><input name="name" placeholder="Your name" title="Your name" type="text" required/></div>
+                           <div class="s-12"><textarea placeholder="Your massage" name="msg" rows="5" required></textarea></div>
+                           <button type="submit">Submit Button</button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- MAP -->
+            <div id="map-block">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.104131782557!2d3.263155414770633!3d6.508501495292057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b8f66a577d34b%3A0x84d8976055b2dcdd!2s25%20Saminu%20Alaba%20St%2C%20Ijegun%2C%20Lagos!5e0!3m2!1sen!2sng!4v1593464805947!5m2!1sen!2sng" width="100%" height="450" frameborder="0" style="border:0"></iframe>
+            </div>
+         </article>
+         <!-- AD REGION -->
+         <div class="line">
+            <div class="advertising horizontal">
+               <img src="{% static 'img/banner-horizontal.jpg' %}" alt="ad banner">
+            </div>
+         </div>
+      </div>
+      <!-- SIDEBAR -->
+      <div class="s-12 l-3">
+         <aside>
+           <!-- LATEST POSTS -->
+           <div class="aside-block margin-bottom">
+              <h3>Latest posts</h3>
+              {% for post in posts %}
+              {% if forloop.counter <= 10 %}
+              <a class="latest-posts" href="{% url 'blog_detail' post.pk%}">
+                 <h5>{{ post.title }}</h5>
+                 <p>
+                    {{ post.body1 | slice:":50" }}...
+                 </p>
+              </a>
+              {% endif %}
+              {% endfor %}
+           </div>
+           <!-- AD REGION -->
+           <div class="advertising margin-bottom">
+              <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+           </div>
+         </aside>
+      </div>
+   </div>
+</section>
+{% endblock %}

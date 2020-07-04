@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block page_title %}
+{{ post.title }}
+{% endblock %}
+
+{% block main_section %}
+  <section id="article-section" class="line">
+     <div class="margin">
+        <!-- ARTICLES -->
+        <div class="s-12 l-9">
+           <!-- ARTICLE 1 -->
+           <article class="margin-bottom">
+              <div class="post-1 line">
+                 <!-- image -->
+                 <div class="s-12 l-11 post-image">
+                    <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+                 </div>
+                 <!-- date -->
+                 <div class="s-12 l-1 post-date">
+                   <p class="date">{{ post.date_created.day }}</p>
+                   <p class="month">{{ post.date_created|date:'F' }}</p>
+                   <p class="month">{{ post.date_created.year }}</p>
+                 </div>
+              </div>
+              <!-- text -->
+              <div class="post-text">
+                 <h1>{{ post.title }}</h1>
+                 <p class="author">
+                   <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                   &nbsp;
+                   {% for category in post.categories.all %}
+                   <a id="link" href="{% url 'blog_category' category.name %}">
+                     {{ category.name }} |
+                   </a>&nbsp;
+                   {% endfor %}
+                 </p>
+                 <p>{{ post.body1 }}</p>
+                 <br>
+                 <blockquote>
+                  {{ post.quote }}
+                 </blockquote>
+                 <br>
+                 <p>{{ post.body2 }}</p>
+                 <h2>{{ post.sub_title }}</h2>
+                 <p>{{ post.body3 }}</p>
+                 <img src="{{ post.sub_image.url }}" alt="{{ post.title }}2">
+                 <p>{{ post.body4 }}</p>
+                 <p class="author">{{ post.author }}</p>
+                     <div class="line">
+                        <div class="margin">
+                           <div class="s-12 l-6">
+                              <h3>Comments:</h3>
+                              {% for comment in comments %}
+                              <small>
+                              <p>
+                                  On {{comment.date_created.date }}&nbsp;
+                                  <b>{{ comment.author }}</b> wrote:
+                              </p>
+                              </small>
+                              <p>{{ comment.body }}</p>
+                              <hr>
+                              {% endfor %}
+                           </div>
+                           <div class="s-12 l-6">
+                              <h4>Leave a comment:</h4>
+                              <form class="customform" action="/post/{{ post.pk }}/" method="post">
+                                {% csrf_token %}
+                                 <div class="s-12">{{ form.author }}</div>
+                                 <div class="s-12">{{ form.body }}</div>
+                                 <button type="submit" class="btn btn-primary">Submit</button>
+                              </form>
+                           </div>
+                        </div>
+                     </div>
+
+              </div>
+           </article>
+           <!-- AD REGION -->
+           <div class="line">
+              <div class="advertising horizontal">
+                 <img src="{% static 'img/banner-horizontal.jpg' %}" alt="ad banner">
+              </div>
+           </div>
+        </div>
+        <!-- SIDEBAR -->
+        <div class="s-12 l-3">
+           <aside>
+             <!-- AD REGION -->
+                   <div class="advertising margin-bottom">
+                      <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+                   </div>
+                   <!-- LATEST POSTS -->
+                   <div class="aside-block margin-bottom">
+                      <h3>Latest posts</h3>
+                      {% for post in posts %}
+                      {% if forloop.counter <= 10 %}
+                      <a class="latest-posts" href="{% url 'blog_detail' post.pk%}">
+                         <h5>{{ post.title }}</h5>
+                         <p>
+                            {{ post.body1 | slice:":50" }}...
+                         </p>
+                      </a>
+                      {% endif %}
+                      {% endfor %}
+                   </div>
+                   <div class="advertising margin-bottom">
+                      <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+                   </div>
+           </aside>
+        </div>
+     </div>
+  </section>
+{% endblock %}

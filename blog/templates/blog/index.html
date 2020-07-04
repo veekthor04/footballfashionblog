@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+{% load static %}
+{% load my_tags %}
+
+{% block page_title %}
+Football Fashion Home
+{% endblock %}
+
+{% block main_section %}
+<section id="home-section" class="line">
+   <div class="margin">
+      <!-- ARTICLES -->
+      <div class="s-12 l-9">
+
+        {% for post in posts %}
+        {% if forloop.counter|modulo:5 == 1 %}
+         <!-- ARTICLE 1 -->
+         <article class="post-1 line">
+            <!-- image -->
+            <div class="s-12 l-6 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+            </div>
+            <!-- text -->
+            <div class="s-12 l-5 post-text">
+               <a href="{% url 'blog_detail' post.pk%}">
+                  <h2>{{ post.title }}</h2>
+               </a>
+               <small>
+                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                 &nbsp;
+                 {% for category in post.categories.all %}
+                 <a id="link" href="{% url 'blog_category' category.name %}">
+                   {{ category.name }} |
+                 </a>&nbsp;
+                 {% endfor %}
+               </small>
+               <p>{{ post.body1 | slice:":150" }}...
+               </p>
+            </div>
+            <!-- date -->
+            <div class="s-12 l-1 post-date">
+               <p class="date">{{ post.date_created.day }}</p>
+               <p class="month">{{ post.date_created|date:'F' }}</p>
+               <p class="month">{{ post.date_created.year }}</p>
+            </div>
+         </article>
+         {% elif forloop.counter|modulo:5 == 2 %}
+         <!-- ARTICLE 2 -->
+         <article class="post-2 right-align line">
+            <!-- image -->
+            <div class="s-12 l-6 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+            </div>
+            <!-- text -->
+            <div class="s-12 l-5 post-text">
+               <a href="{% url 'blog_detail' post.pk%}">
+                  <h2>{{ post.title }}</h2>
+               </a>
+               <small>
+                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                 &nbsp;
+                 {% for category in post.categories.all %}
+                 <a id="link" href="{% url 'blog_category' category.name %}">
+                   {{ category.name }} |
+                 </a>&nbsp;
+                 {% endfor %}
+               </small>
+            <p>{{ post.body1 | slice:":150" }}...
+            </p>
+            </div>
+            <!-- date -->
+            <div class="s-12 l-1 post-date">
+              <p class="date">{{ post.date_created.day }}</p>
+              <p class="month">{{ post.date_created|date:'F' }}</p>
+              <p class="month">{{ post.date_created.year }}</p>
+            </div>
+         </article>
+         {% elif forloop.counter|modulo:5 == 3 %}
+         <!-- ARTICLE 3 -->
+         <article class="post-3 line">
+            <!-- image -->
+            <div class="s-12 l-6 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+            </div>
+            <!-- text -->
+            <div class="s-12 l-5 post-text">
+               <a href="{% url 'blog_detail' post.pk%}">
+                  <h2>{{ post.title }}</h2>
+               </a>
+               <small>
+                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                 &nbsp;
+                 {% for category in post.categories.all %}
+                 <a id="link" href="{% url 'blog_category' category.name %}">
+                   {{ category.name }} |
+                 </a>&nbsp;
+                 {% endfor %}
+               </small>
+               <p>{{ post.body1 | slice:":150" }}...
+               </p>
+            </div>
+            <!-- date -->
+            <div class="s-12 l-1 post-date">
+              <p class="date">{{ post.date_created.day }}</p>
+              <p class="month">{{ post.date_created|date:'F' }}</p>
+              <p class="month">{{ post.date_created.year }}</p>
+            </div>
+         </article>
+         {% elif forloop.counter|modulo:5 == 4 %}
+         <!-- ARTICLE 4 -->
+         <article class="post-4 right-align line">
+            <!-- image -->
+            <div class="s-12 l-6 post-image">
+               <a href="{% url 'blog_detail' post.pk%}">
+               <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+               </a>
+            </div>
+            <!-- text -->
+            <div class="s-12 l-5 post-text">
+               <a href="{% url 'blog_detail' post.pk%}">
+                  <h2>{{ post.title }}</h2>
+               </a>
+               <small>
+                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                 &nbsp;
+                 {% for category in post.categories.all %}
+                 <a id="link" href="{% url 'blog_category' category.name %}">
+                   {{ category.name }} |
+                 </a>&nbsp;
+                 {% endfor %}
+               </small>
+               <p>{{ post.body1 | slice:":150" }}...
+               </p>
+            </div>
+            <!-- date -->
+            <div class="s-12 l-1 post-date">
+              <p class="date">{{ post.date_created.day }}</p>
+              <p class="month">{{ post.date_created|date:'F' }}</p>
+              <p class="month">{{ post.date_created.year }}</p>
+            </div>
+         </article>
+         {% else %}
+         <!-- ARTICLE 5 -->
+         <article class="post-5 line">
+           <!-- image -->
+           <div class="s-12 l-6 post-image">
+              <a href="{% url 'blog_detail' post.pk%}">
+              <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
+              </a>
+           </div>
+            <!-- text -->
+            <div class="s-12 l-11 post-text">
+               <a href="{% url 'blog_detail' post.pk%}">
+                  <h2>{{ post.title }}</h2>
+               </a>
+               <small>
+                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
+                 &nbsp;
+                 {% for category in post.categories.all %}
+                 <a id="link" href="{% url 'blog_category' category.name %}">
+                   {{ category.name }} |
+                 </a>&nbsp;
+                 {% endfor %}
+               </small>
+               <p>{{ post.body1 | slice:":150" }}...
+               </p>
+            </div>
+            <!-- date -->
+            <div class="s-12 l-1 post-date">
+              <p class="date">{{ post.date_created.day }}</p>
+              <p class="month">{{ post.date_created|date:'F' }}</p>
+              <p class="month">{{ post.date_created.year }}</p>
+            </div>
+         </article>
+         {% endif %}
+         {% endfor %}
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="s-12 l-3">
+         <aside>
+           <!-- AD REGION -->
+           <div class="advertising margin-bottom">
+              <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+           </div>
+           <!-- LATEST POSTS -->
+           <div class="aside-block margin-bottom">
+              <h3>Latest posts</h3>
+              {% for post in posts %}
+              {% if forloop.counter <= 10 %}
+              <a class="latest-posts" href="{% url 'blog_detail' post.pk%}">
+                 <h5>{{ post.title }}</h5>
+                 <p>
+                    {{ post.body1 | slice:":50" }}...
+                 </p>
+              </a>
+              {% endif %}
+              {% endfor %}
+           </div>
+           <!-- AD REGION -->
+           <div class="advertising margin-bottom">
+              <img class="advert" src="{% static 'img/banner.jpg' %}" alt="ad banner">
+           </div>
+         </aside>
+      </div>
+   </div>
+</section>
+{% endblock %}
