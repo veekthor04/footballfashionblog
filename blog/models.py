@@ -24,6 +24,9 @@ class SiteConfiguration(SingletonModel):
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
+    class Meta:
+        ordering = ['name']
+
     def __str__(self):
         return self.name
 
@@ -32,18 +35,25 @@ class Post(models.Model):
     main_image = models.ImageField(upload_to='post/%Y/%m/%d')
     body1 = models.TextField()
     quote = models.TextField(blank=True)
+    sub_image = models.ImageField(upload_to='post/%Y/%m/%d', blank=True)
     body2 = models.TextField(blank=True)
+    embed_code = models.TextField(blank=True)
     sub_title = models.CharField(max_length=250, blank=True)
     body3 = models.TextField(blank=True)
-    sub_image = models.ImageField(upload_to='post/%Y/%m/%d', blank=True)
+    sub_image2 = models.ImageField(upload_to='post/%Y/%m/%d', blank=True)
     body4 = models.TextField(blank=True)
+    sub_image3 = models.ImageField(upload_to='post/%Y/%m/%d', blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
     date_modifield = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
     author = models.CharField(max_length=100)
 
+    class Meta:
+        ordering = ['-date_created']
+
     def __str__(self):
         return self.title
+
 
 class Comment(models.Model):
     author = models.CharField(max_length=100)

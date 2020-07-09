@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'blog',
     'solo',
+    'sorl.thumbnail',
+    'django_instagram',
 ]
 
 MIDDLEWARE = [

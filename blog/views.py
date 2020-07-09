@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib import messages
 from .models import Post, Comment, Category, SiteConfiguration
 from .forms import CommentForm,TagForm
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
+from django.core.paginator import Paginator
 import os
 # CONTACT_MAIL = os.getenv('CONTACT_MAIL')
 CONTACT_MAIL="victoradenuga04@yahoo.com"
@@ -12,8 +12,24 @@ CONTACT_MAIL="victoradenuga04@yahoo.com"
 # Create your views here.
 def blog_index(request):
     posts = Post.objects.all().order_by('-date_created')
+    paginator = Paginator(posts, 1)
+    page_number = request.GET.get('page',1)
+    page = paginator.get_page(page_number)
+    if page.has_next():
+        next_url = f'?page={page.next_page_number()}'
+    else:
+        next_url = ''
+    if page.has_previous():
+        prev_url = f'?page={page.previous_page_number()}'
+    else:
+        prev_url = ''
+
     context = {
-        "posts": posts,
+        'posts': posts,
+        "page": page,
+        'next_page_url': next_url,
+        'prev_page_url': prev_url,
+
     }
     return render(request, "blog/index.html", context)
 

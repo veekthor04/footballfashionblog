@@ -12,8 +12,8 @@ Football Fashion Home
       <!-- ARTICLES -->
       <div class="s-12 l-9">
 
-        {% for post in posts %}
-        {% if forloop.counter|modulo:5 == 1 %}
+        {% for post in page.object_list %}
+        {% if forloop.counter|modulo:4 == 1 %}
          <!-- ARTICLE 1 -->
          <article class="post-1 line">
             <!-- image -->
@@ -46,7 +46,7 @@ Football Fashion Home
                <p class="month">{{ post.date_created.year }}</p>
             </div>
          </article>
-         {% elif forloop.counter|modulo:5 == 2 %}
+         {% elif forloop.counter|modulo:4 == 2 %}
          <!-- ARTICLE 2 -->
          <article class="post-2 right-align line">
             <!-- image -->
@@ -79,7 +79,7 @@ Football Fashion Home
               <p class="month">{{ post.date_created.year }}</p>
             </div>
          </article>
-         {% elif forloop.counter|modulo:5 == 3 %}
+         {% elif forloop.counter|modulo:4 == 3 %}
          <!-- ARTICLE 3 -->
          <article class="post-3 line">
             <!-- image -->
@@ -112,7 +112,7 @@ Football Fashion Home
               <p class="month">{{ post.date_created.year }}</p>
             </div>
          </article>
-         {% elif forloop.counter|modulo:5 == 4 %}
+         {% else %}
          <!-- ARTICLE 4 -->
          <article class="post-4 right-align line">
             <!-- image -->
@@ -145,41 +145,34 @@ Football Fashion Home
               <p class="month">{{ post.date_created.year }}</p>
             </div>
          </article>
-         {% else %}
-         <!-- ARTICLE 5 -->
-         <article class="post-5 line">
-           <!-- image -->
-           <div class="s-12 l-6 post-image">
-              <a href="{% url 'blog_detail' post.pk%}">
-              <img src="{{ post.main_image.url }}" alt="{{ post.title }}">
-              </a>
-           </div>
-            <!-- text -->
-            <div class="s-12 l-11 post-text">
-               <a href="{% url 'blog_detail' post.pk%}">
-                  <h2>{{ post.title }}</h2>
-               </a>
-               <small>
-                 <a id="link" href="{% url 'blog_category' 'all' %}" >Tags:</a>
-                 &nbsp;
-                 {% for category in post.categories.all %}
-                 <a id="link" href="{% url 'blog_category' category.name %}">
-                   {{ category.name }} |
-                 </a>&nbsp;
-                 {% endfor %}
-               </small>
-               <p>{{ post.body1 | slice:":150" }}...
-               </p>
-            </div>
-            <!-- date -->
-            <div class="s-12 l-1 post-date">
-              <p class="date">{{ post.date_created.day }}</p>
-              <p class="month">{{ post.date_created|date:'F' }}</p>
-              <p class="month">{{ post.date_created.year }}</p>
-            </div>
-         </article>
          {% endif %}
          {% endfor %}
+
+         <div class="outer">
+           <nav class="inner" aria-label="...">
+             <ul class="pagination">
+               <li class="page-item {% if not prev_page_url %} disabled {% endif %}">
+                 <a class="page-link" href="{{ prev_page_url }}" tabindex="-1">Previous</a>
+               </li>
+
+               {% for n in page.paginator.page_range %}
+               {% if page.number == n %}
+               <li class="page-item active">
+                 <a class="page-link" href="?page={{ n }}">{{ n }} <span class="sr-only">(current)</span></a>
+               </li>
+               {% elif n > page.number|add:-3 and n < page.number|add:3 %}
+               <li class="page-item">
+                 <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+               </li>
+               {% endif %}
+               {% endfor %}
+
+               <li class="page-item {% if not next_page_url %} disabled {% endif %}">
+                 <a class="page-link" href="{{ next_page_url }}">Next</a>
+               </li>
+             </ul>
+           </nav>
+         </div>
       </div>
 
       <!-- SIDEBAR -->

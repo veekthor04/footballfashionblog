@@ -43,11 +43,20 @@
                   {{ post.quote }}
                  </blockquote>
                  <br>
+                 {% if post.sub_image %}
+                 <img src="{{ post.sub_image.url }}" alt="{{ post.title }}2">
+                 {% endif %}
                  <p>{{ post.body2 }}</p>
+                 <p id="embed">{{ post.embed_code |safe }}</p>
                  <h2>{{ post.sub_title }}</h2>
                  <p>{{ post.body3 }}</p>
-                 <img src="{{ post.sub_image.url }}" alt="{{ post.title }}2">
+                 {% if post.sub_image2 %}
+                 <img src="{{ post.sub_image2.url }}" alt="{{ post.title }}3">
+                 {% endif %}
                  <p>{{ post.body4 }}</p>
+                 {% if post.sub_image3 %}
+                 <img src="{{ post.sub_image3.url }}" alt="{{ post.title }}4">
+                 {% endif %}
                  <p class="author">{{ post.author }}</p>
                      <div class="line">
                         <div class="margin">
