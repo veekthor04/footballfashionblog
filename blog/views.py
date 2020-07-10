@@ -6,8 +6,6 @@ from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from django.core.paginator import Paginator
 import os
-# CONTACT_MAIL = os.getenv('CONTACT_MAIL')
-CONTACT_MAIL="victoradenuga04@yahoo.com"
 
 # Create your views here.
 def blog_index(request):

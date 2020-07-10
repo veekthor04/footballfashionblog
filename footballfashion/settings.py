@@ -35,7 +35,7 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['football4fashion.herokuapp.com','localhost', '127.0.0.1']
 
 
 # Application definition
