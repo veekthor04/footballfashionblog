@@ -12,7 +12,7 @@ CONTACT_MAIL="victoradenuga04@yahoo.com"
 # Create your views here.
 def blog_index(request):
     posts = Post.objects.all().order_by('-date_created')
-    paginator = Paginator(posts, 1)
+    paginator = Paginator(posts, 5)
     page_number = request.GET.get('page',1)
     page = paginator.get_page(page_number)
     if page.has_next():
@@ -86,12 +86,26 @@ def blog_category(request, category='all'):
         )
     tagform = TagForm()
     categories = Category.objects.all()
+    paginator = Paginator(posts, 5)
+    page_number = request.GET.get('page',1)
+    page = paginator.get_page(page_number)
+    if page.has_next():
+        next_url = f'?page={page.next_page_number()}'
+    else:
+        next_url = ''
+    if page.has_previous():
+        prev_url = f'?page={page.previous_page_number()}'
+    else:
+        prev_url = ''
     context = {
         "selected":selected,
         "category": category,
         "posts": posts,
         "categories" : categories,
-        "tagform": tagform
+        "tagform": tagform,
+        "page": page,
+        'next_page_url': next_url,
+        'prev_page_url': prev_url,
     }
     return render(request, "blog/archive.html", context)
 
@@ -104,12 +118,13 @@ def blog_contact(request):
         name = request.POST['name']
         email = request.POST['email']
         msg = request.POST['msg']
+        config = SiteConfiguration.objects.get()
         message = f'Name: {name},\n\n' \
         f'Email: {email},\n\n' \
 		f'Message: {msg}'
         subject = "Private Message"
         try:
-            send_mail(subject, message, email, [CONTACT_MAIL])
+            send_mail(subject, message, email, [config.contact_mail])
         except BadHeaderError:
             messages.info(request, 'Invalid header found.')
             return render(request, "contact.html")

@@ -6,6 +6,7 @@ class SiteConfiguration(SingletonModel):
     site_name = models.CharField(max_length=255, default='Site')
     site_name2 = models.CharField(max_length=255, default='Name')
     slogan = models.CharField(max_length=255, blank=True)
+    contact_mail = models.CharField(max_length=500, default='victoradenuga04@yahoo.com')
     main_image = models.ImageField(upload_to='post/%Y/%m/%d')
     body1 = models.TextField()
     quote = models.TextField(blank=True)
