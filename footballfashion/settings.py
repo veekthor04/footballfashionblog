@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'blog',
     'solo',
-    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
