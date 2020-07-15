@@ -52,3 +52,24 @@ dl, ol, ul {
     background-color: #d12767 !Important;
     border: solid 1px white !Important;
 }
+
+#search-bar{
+  background-color: #162b4d !Important;
+}
+
+div#search-div {
+    float: right;
+}
+
+.navbar{
+  display: inline-block !important;
+}
+
+div#search-div > form > button {
+  color: white !important;
+  border: solid 1px white !Important;
+}
+
+div#search-div > form > button:hover {
+  background-color: #d12767 !important;
+}

@@ -5,6 +5,7 @@ from .forms import CommentForm,TagForm
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib import messages
 from django.core.paginator import Paginator
+from django.db.models import Q
 import os
 
 # Create your views here.
@@ -34,7 +35,6 @@ def blog_index(request):
 def blog_detail(request, pk):
     post = Post.objects.get(pk=pk)
     posts = Post.objects.all().order_by('-date_created')
-    form = CommentForm()
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -45,35 +45,43 @@ def blog_detail(request, pk):
             )
             comment.save()
     comments = Comment.objects.filter(post=post)
+    form = CommentForm()
     context = {
         "post": post,
         "comments": comments,
         "form": form,
         "posts": posts,
     }
-    print(post.categories.all)
     return render(request, "blog/detail.html", context)
 
 def blog_category(request, category='all'):
     selected=[]
+    search = ''
     if request.method == 'POST':
-        form = TagForm(request.POST)
-        if form.is_valid():
-            tags = form.cleaned_data["tag"]
-            if tags:
-                for item in tags:
-                    selected.append(item.name)
+        if not(request.POST.get('search')):
+            form = TagForm(request.POST)
+            if form.is_valid():
+                tags = form.cleaned_data["tag"]
+                if tags:
+                    for item in tags:
+                        selected.append(item.name)
 
     if category == 'custom':
-        if len(selected) > 0:
-            posts = Post.objects.filter(
-                categories__name__in=selected
-            ).order_by(
-                '-date_created'
-            ).distinct()
+        if request.POST.get('search'):
+            search = request.POST.get('search')
+            posts = Post.objects.filter(Q(title__icontains=search) |
+                Q(body1__icontains=search) | Q(body2__icontains=search) |
+                Q(body3__icontains=search) | Q(body4__icontains=search))
         else:
-            posts = Post.objects.all().order_by('-date_created')
-            selected = None
+            if len(selected) > 0:
+                posts = Post.objects.filter(
+                    categories__name__in=selected
+                ).order_by(
+                    '-date_created'
+                ).distinct()
+            else:
+                posts = Post.objects.all().order_by('-date_created')
+                selected = None
     elif category == 'all':
         posts = Post.objects.all().order_by('-date_created')
     else:
@@ -104,6 +112,7 @@ def blog_category(request, category='all'):
         "page": page,
         'next_page_url': next_url,
         'prev_page_url': prev_url,
+        'search': search,
     }
     return render(request, "blog/archive.html", context)
 

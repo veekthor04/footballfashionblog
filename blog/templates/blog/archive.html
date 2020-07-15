@@ -11,6 +11,16 @@ Blog Archive
   <div class="margin">
     <!-- ARTICLES -->
     <div class="s-12 l-9">
+      {% if search %}
+      <div>
+         <h1 style="color: white;">Search result for "{{ search }}"</h1>
+         {% if not posts %}
+           <p>
+             Nothing found
+           </p>
+          {% endif %}
+      </div>
+      {% endif %}
 
       {% for post in page.object_list %}
       {% if forloop.counter|modulo:4 == 1 %}
