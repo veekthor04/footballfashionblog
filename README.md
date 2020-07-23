@@ -19,19 +19,19 @@ contact email address.
 
 samples of the admin funtionalities are 
 
-![](media/admin1.png)
+![](media/admin1.PNG)
 
-![](media/admin2.png)
+![](media/admin2.PNG)
 
-![](media/adminpost1.png)
+![](media/adminpost1.PNG)
 
-![](media/adminpost2.png)
+![](media/adminpost2.PNG)
 
-![](media/adminpost3.png)
+![](media/adminpost3.PNG)
 
-![](media/adminsite1.png)
+![](media/adminsite1.PNG)
 
-![](media/adminsite2.png)
+![](media/adminsite2.PNG)
 
 Environmental variables used are:
 DATABASE_URL,
